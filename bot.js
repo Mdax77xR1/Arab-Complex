@@ -897,6 +897,7 @@ client.on("ready", () => {
     var guild;
     while (!guild)
         guild = client.guilds.get("494920525051592705");
+        client.channels.get("513065026907537410").send({ embed: stewart });
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
