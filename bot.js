@@ -892,52 +892,11 @@ hours = 12;
 
 
 
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-
-
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
-
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-
-client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-
-
-
-
 
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.get("اي دي سيرفرك - Server id");
+        guild = client.guilds.get("494920525051592705");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -973,6 +932,10 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
+
+ 
+ 
+
 
 
 
