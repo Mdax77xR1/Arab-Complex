@@ -933,8 +933,11 @@ client.on("guildMemberAdd", (member) => {
     });
 });
 
- 
- 
+ client.on('ready', () => {
+var x = client.channels.get("513066769124950016");
+if (x) x.join();
+});
+
 
 
 
