@@ -932,13 +932,6 @@ client.on('message',async message => {
 
 
 
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
-:crown:اسم العضو  ${member}:crown:  
-انت العضو رقم ${member.guild.memberCount} `) 
-}).catch(console.error)
-})
 
 
 
@@ -979,9 +972,9 @@ client.on('message', msg => {
           if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
           if (!args[1]) return msg.reply('``اكتب السبب``')
           //غير اسم الروم او سوي روم بذا الاسم
-          if (msg.guild.channels.find('name', 'warns')) {
+          if (msg.guild.channels.find('name', '𝑪𝑯𝑨𝑻')) {
             //اذا غيرت فوق غير هنا كمان
-            msg.guild.channels.find('name', 'warns').send(`
+            msg.guild.channels.find('name', '𝑪𝑯𝑨𝑻').send(`
           تم اعطائك تنبيه : ${msg.mentions.members.first()}
           لأنك قمت بما يلي
           ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
@@ -991,16 +984,6 @@ client.on('message', msg => {
 })
 
 
-
-client.on('typingStart', (ch, user) => {
-      if(user.presence.status === 'offline') {
-
-          ch.send(`${user}☹ هاهاهاا , كشفتك وانت تكتب ي اوف لاين✉`)
-          .then(msg => {
-              msg.delete(10000)
-          })
-      }
-  })
 
 
 
