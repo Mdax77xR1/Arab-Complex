@@ -999,45 +999,35 @@ if (command == "embed") {
 
 
 
-client.on('message', async message =>{
-  if (message.author.boss) return;
-    var prefix = "$";
-
-if (!message.content.startsWith(prefix)) return;
-    let command = message.content.split(" ")[0];
-     command = command.slice(prefix.length);
-    let args = message.content.split(" ").slice(1);
-    if (command == "warn") {
-        if (!message.channel.guild) return;
-        if(!message.guild.roles.find(r => r.name === 'warns')); // <@502904064514981900>
-        if(!message.guild.roles.find(r => r.name === 'warns')); // <@502904064514981900>
-        let user = message.mentions.users.first();
-        if (message.mentions.users.size < 1) return message.reply(' يجب عليك المنشن اولاً ').then(msg => {msg.delete(5000)});
-        let reason = message.content.split(" ").slice(2).join(" ");
-        const muteembed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setAuthor(Warned!, user.displayAvatarURL)
-        .setThumbnail(user.displayAvatarURL)
-        .addField("busts_in_silhouette  المستخدم",  '[ ' + ${user.tag} + ' ]',true)
-        .addField("hammer  تم بواسطة ", '[ ' + ${message.author.tag} + ' ]',true)
-        .addField("book  السبب", '[ ' + ${reason} + ' ]',true)
-        .addField("User", user, true)
-        message.channel.send({embed : muteembed});
-        var muteembeddm = new Discord.RichEmbed()
-        .setAuthor(Warned!, user.displayAvatarURL)
-        .setDescription(${user} تم اعطائك تحذير
-${message.author.tag}  بواسطة
-[ ${reason} ] : السبب
-اتمنى ان لا يتكرر هذا الغلط مجددا)
-        .setFooter(في سيرفر : ${message.guild.name})
-        .setColor("RANDOM")
-    user.send( muteembeddm);
-  }
-  });
+client.on('message', msg => {
+        if (msg.content.startsWith(`$warn`)) {
+          if(!msg.member.hasPermission("MANAGE_MESSAGES")) return;
+           let args = msg.content.split(" ").slice(1);
+          if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
+          if (!args[1]) return msg.reply('``اكتب السبب``')
+          //غير اسم الروم او سوي روم بذا الاسم
+          if (msg.guild.channels.find('name', 'warns')) {
+            //اذا غيرت فوق غير هنا كمان
+            msg.guild.channels.find('name', 'warns').send(`
+          تم اعطائك تنبيه : ${msg.mentions.members.first()}
+          لأنك قمت بما يلي
+          ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
+          `)
+          }
+        }
+})
 
 
 
+client.on('typingStart', (ch, user) => {
+      if(user.presence.status === 'offline') {
 
+          ch.send(`${user}☹ هاهاهاا , كشفتك وانت تكتب ي اوف لاين✉`)
+          .then(msg => {
+              msg.delete(10000)
+          })
+      }
+  })
 
 
 
