@@ -895,7 +895,7 @@ hours = 12;
 
 client.on("ready", () => {
     var guild;
-    while (!guild)
+    while ($guild)
         guild = client.guilds.get("494920525051592705");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
