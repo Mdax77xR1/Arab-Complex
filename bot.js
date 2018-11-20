@@ -941,7 +941,7 @@ client.on('message',async message => {
 
 
 
-var prefix = "$say";
+var prefix = "say";
 
 client.on('message', message => {
   if (message.author.bot) return;
