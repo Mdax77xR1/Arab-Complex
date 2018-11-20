@@ -464,30 +464,8 @@ reaction3.on("collect", r => {
 
 
 
-client.on('message', message => {
-if (message.content.startsWith("$ban")) {
-    var mention = message.mentions.members.first();
-    if (!args[0]) return msg.reply(`**منشن الشخص اولا**`)
 
-    mention.ban("By: " + message.mentions.users.first);
-    
-    message.channel.send("تم أعطاء باند الى : " + mention.tag);
-};
-});
 
-client.on('message', function(message) {
-    if (message.channel.type === "dm") {
-        if (message.author.id === client.user.id) return;
-        var stewart = new Discord.RichEmbed()
-            .setColor('RANDOM')
-            .setTimestamp()
-            .setTitle('``رساله جديده في خاص البوت``')
-            .setThumbnail(`${message.author.avatarURL}`)
-            .setDescription(`\n\n\`\`\`${message.content}\`\`\``)
-            .setFooter(`من (@${message.author.tag})  |  (${message.author.id})`)
-        client.channels.get("501121173598371844").send({ embed: stewart });
-    }
-});
 
 
 client.on('message', message => {
@@ -695,42 +673,6 @@ client.on('message', message => {
 
 
 
-client.on('message',message =>{
-    var prefix = "$";
-    if(message.content.startsWith(prefix + 'topinvites')) {
-  message.guild.fetchInvites().then(i =>{
-  var invites = [];
-   
-  i.forEach(inv =>{
-    var [invs,i]=[{},null];
-     
-    if(inv.maxUses){
-        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
-    }else{
-        invs[inv.code] =+ inv.uses;
-    }
-        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
-   
-  });
-  var embed = new Discord.RichEmbed()
-  .setColor("#000000")
-  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
-  .setThumbnail("https://cdn.discordapp.com/avatars/500704774677856266/53f1ec7e75d3e1164431da77880aa195.png?size=2048")
-           message.channel.send({ embed: embed });
-   
-  });
-   
-    }
-  });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -893,16 +835,7 @@ hours = 12;
 
 
 
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "𝑪𝑯𝑨𝑻");
-    logChannel.send(`Invited by: <@${inviter.tag}>`);
-  });
-});
+
 
 
 
@@ -929,26 +862,6 @@ client.on('message',async message => {
 
 
 
-
-
-
-client.on('message', msg => {
-        if (msg.content.startsWith(`$warn`)) {
-          if(!msg.member.hasPermission("MANAGE_MESSAGES")) return;
-           let args = msg.content.split(" ").slice(1);
-          if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
-          if (!args[1]) return msg.reply('``اكتب السبب``')
-          //غير اسم الروم او سوي روم بذا الاسم
-          if (msg.guild.channels.find('name', '𝑪𝑯𝑨𝑻')) {
-            //اذا غيرت فوق غير هنا كمان
-            msg.guild.channels.find('name', '𝑪𝑯𝑨𝑻').send(`
-          تم اعطائك تنبيه : ${msg.mentions.members.first()}
-          لأنك قمت بما يلي
-          ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
-          `)
-          }
-        }
-})
 
 
 
